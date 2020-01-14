@@ -9,17 +9,14 @@ import 'normalize.css'
 
 const AppRouter = () => (
   <BrowserRouter>
-    <div className="content">
+    <div>
       <Header />
       <Switch>
         <Route path="/" component={Home} exact={true}/>
         <Route path="/versus" component={Versus} />
         <Route path="/winners" component={Winners} />
       </Switch>
-    </div>
-    <div className="push"></div>
-    <div className="footer">
-        <Footer/>
+      <Footer/>
     </div>
   </BrowserRouter>
 )
