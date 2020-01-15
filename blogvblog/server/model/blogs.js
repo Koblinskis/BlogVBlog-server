@@ -16,7 +16,7 @@ const blogSchema = new mongoose.Schema({
     type: Number,
   },
   versus: {
-    type: Array,
+    type: Object,
   }
 })
 
