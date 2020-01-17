@@ -13,7 +13,7 @@ const timelineSchema = new mongoose.Schema({
     type: String,
   },
   timestamp: {
-    type: Number,
+    type: Object,
   },
   currentScore: {
     type: Number,
@@ -31,6 +31,15 @@ const timelineSchema = new mongoose.Schema({
     type: Number,
   }
 })
+
+timelineSchema.statics.createTimeline = async function() {
+  const timeline = new Timeline(req.body)
+
+    timeline.timestamp = timestamp
+    await timeline.save()
+
+    res.send(timeline)
+}
 
 const Timeline = mongoose.model('Timeline', timelineSchema)
 
