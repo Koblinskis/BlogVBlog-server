@@ -49,7 +49,7 @@ class Versus extends React.Component {
     } else {
       const data = { winner: this.state.titleTwo.id , loser: this.state.titleOne.id }
       try {
-        const res = await fetch('/winner', {
+        const res = await fetch('/vote', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

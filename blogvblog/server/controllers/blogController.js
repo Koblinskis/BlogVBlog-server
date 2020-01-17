@@ -11,7 +11,7 @@ exports.blogs_versus_get = async function(req, res) {
   }
 }
 
-exports.blogs_vote_post = async function(req, res) {
+exports.blogs_voted_post = async function(req, res) {
   try{
     const winnerBlog = req.body.blogTitles
     const winnerObjOne = {
@@ -37,7 +37,7 @@ exports.blogs_vote_post = async function(req, res) {
   }
 }
 
-exports.blogs_winner_post = async function(req, res) {
+exports.blogs_vote_post = async function(req, res) {
   try{
     const winnerId = req.body.winner
     const loserId = req.body.loser
@@ -85,8 +85,9 @@ exports.blogs_winner_post = async function(req, res) {
     const loserTimeline = new Timeline(loserTimeObj)
     await winnerTimeline.save()
     await loserTimeline.save()
+    const newBlogs = await Blogs.getBlogTitles()
 
-    res.send([winnerTimeline, loserTimeline, winnerResults, loserResults])
+    res.send([winnerTimeline, loserTimeline, newBlogs])
   
   } catch (e) {
     res.status(500).send(e)
