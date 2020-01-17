@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn server`
+
+Runs the nodejs server with automatic reload. Server runs on 3001 (for now will be fixed in deployment)
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />

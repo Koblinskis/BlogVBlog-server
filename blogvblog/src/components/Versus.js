@@ -6,7 +6,7 @@ class Versus extends React.Component {
     category: null,
     titleOne: {},
     titleTwo: {},
-    disable: undefined,
+    disable: false,
     storedBlogs: {}
   };
 
@@ -78,7 +78,7 @@ class Versus extends React.Component {
     setTimeout(() => {
       this.setState((preState) => {
         return {
-          disable: undefined,
+          disable: false,
           category: preState.storedBlogs.category,
           titleOne: preState.storedBlogs.titleOne,
           titleTwo: preState.storedBlogs.titleTwo,
@@ -91,9 +91,9 @@ class Versus extends React.Component {
     return (
       <div>
         <h1>Versus</h1>
-        <h3>{this.state.category}</h3>
-        <text>Title One: </text><a className={this.state.disable && "disable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a><hr/>
-        <text>Title Two: </text><a className={this.state.disable && "disable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
+        <h3 className="title">{this.state.category}</h3>
+        <p className="option">Blog Option One: </p><a className={this.state.disable ? "disable" : "enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a><hr/>
+        <p className="option">Blog Option Two: </p><a className={this.state.disable ? "disable" : "enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
       </div>
     )
   }
