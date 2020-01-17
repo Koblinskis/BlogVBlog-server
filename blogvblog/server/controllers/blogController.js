@@ -13,7 +13,6 @@ exports.blogs_versus_get = async function(req, res) {
 
 exports.blogs_vote_post = async function(req, res) {
   try{
-    const blogs = await Blogs.getBlogTitles()
     const winnerBlog = req.body.blogTitles
     const winnerObjOne = {
       winner: winnerBlog[0]._id,
