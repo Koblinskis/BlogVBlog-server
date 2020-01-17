@@ -1,10 +1,13 @@
 import React from 'react'
+import '../styles/versus.css'
 
 class Versus extends React.Component {
   state = {
     category: null,
     titleOne: {},
     titleTwo: {},
+    disable: false,
+    storedBlogs: {}
   };
 
   componentDidMount() {
@@ -37,7 +40,17 @@ class Versus extends React.Component {
         },
         body: JSON.stringify(data)
       })
-      console.log('Success:', await res.json())
+      const newBlogs = await res.json()
+      this.setState(() => {
+        return {
+          storedBlogs: {
+            category: newBlogs[2].category,
+            titleOne: newBlogs[2].blogTitles[0],
+            titleTwo: newBlogs[2].blogTitles[1]
+          }
+        }
+      })
+      console.log(this.state.storedBlogs)
     } catch(error) {
       console.error('Error:', error);
     };
@@ -47,11 +60,16 @@ class Versus extends React.Component {
     e.preventDefault();
     if(e.target.innerText === this.state.titleOne.title) {
       const data = { winner: this.state.titleOne.id , loser: this.state.titleTwo.id }
+      this.setState(() => ({ disable: true }))
       this.postVote(data)
     } else {
       const data = { winner: this.state.titleTwo.id , loser: this.state.titleOne.id }
+      this.setState(() => ({ disable: true }))
       this.postVote(data)
     }
+    setTimeout(() => {
+      this.setState(() => ({ disable: false }))
+    }, 1500)
   }
 
   render() {
@@ -59,8 +77,8 @@ class Versus extends React.Component {
       <div>
         <h1>Versus</h1>
         <h3>{this.state.category}</h3>
-        <text>Title One: </text><a onClick={this.postVoteResults}>{this.state.titleOne.title}</a><hr/>
-        <text>Title Two: </text><a onClick={this.postVoteResults}>{this.state.titleTwo.title}</a>
+        <text>Title One: </text><a className={this.state.disable && "disable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a><hr/>
+        <text>Title Two: </text><a className={this.state.disable && "disable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
       </div>
     )
   }
