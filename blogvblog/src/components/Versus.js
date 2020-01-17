@@ -6,7 +6,7 @@ class Versus extends React.Component {
     category: null,
     titleOne: {},
     titleTwo: {},
-    disable: false,
+    disable: undefined,
     storedBlogs: {}
   };
 
@@ -15,8 +15,8 @@ class Versus extends React.Component {
     this.getBlogs()
       .then(res => this.setState({ 
         category: res.category, 
-        titleOne: { title: res.blogTitles[0].title, id: res.blogTitles[0]._id}, 
-        titleTwo: { title: res.blogTitles[1].title, id: res.blogTitles[1]._id },
+        titleOne: { title: res.blogTitles[0].title, _id: res.blogTitles[0]._id}, 
+        titleTwo: { title: res.blogTitles[1].title, _id: res.blogTitles[1]._id },
       }))
       .catch(err => console.log(err));
   }
@@ -41,6 +41,10 @@ class Versus extends React.Component {
         body: JSON.stringify(data)
       })
       const newBlogs = await res.json()
+      console.log(newBlogs)
+      if(!newBlogs[2].category) {
+        throw new Error()
+      }
       this.setState(() => {
         return {
           storedBlogs: {
@@ -56,19 +60,30 @@ class Versus extends React.Component {
     };
   }
 
-  postVoteResults = (e) => {
+  postVoteResults = async (e) => {
     e.preventDefault();
     if(e.target.innerText === this.state.titleOne.title) {
-      const data = { winner: this.state.titleOne.id , loser: this.state.titleTwo.id }
+      console.log(this.state)
+      const data = { winner: this.state.titleOne._id , loser: this.state.titleTwo._id }
       this.setState(() => ({ disable: true }))
-      this.postVote(data)
+      console.log(data)
+      await this.postVote(data)
     } else {
-      const data = { winner: this.state.titleTwo.id , loser: this.state.titleOne.id }
+      console.log(this.state)
+      const data = { winner: this.state.titleTwo._id , loser: this.state.titleOne._id }
       this.setState(() => ({ disable: true }))
-      this.postVote(data)
+      console.log(data)
+      await this.postVote(data)
     }
     setTimeout(() => {
-      this.setState(() => ({ disable: false }))
+      this.setState((preState) => {
+        return {
+          disable: undefined,
+          category: preState.storedBlogs.category,
+          titleOne: preState.storedBlogs.titleOne,
+          titleTwo: preState.storedBlogs.titleTwo,
+        }
+      })
     }, 1500)
   }
 

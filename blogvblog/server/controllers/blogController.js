@@ -80,6 +80,8 @@ exports.blogs_vote_post = async function(req, res) {
       opponentId: winnerResults._id,
       opponentCurrentScore: winnerResults.score
     }
+
+    console.log(winnerTimeObj)
     
     const winnerTimeline = new Timeline(winnerTimeObj)
     const loserTimeline = new Timeline(loserTimeObj)
