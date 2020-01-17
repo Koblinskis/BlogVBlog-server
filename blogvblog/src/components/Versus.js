@@ -28,39 +28,29 @@ class Versus extends React.Component {
     return body;
   };
   
+  postVote = async (data) => {
+    try {
+      const res = await fetch('/vote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      console.log('Success:', await res.json())
+    } catch(error) {
+      console.error('Error:', error);
+    };
+  }
 
-  postVote = async (e) => {
+  postVoteResults = (e) => {
     e.preventDefault();
     if(e.target.innerText === this.state.titleOne.title) {
       const data = { winner: this.state.titleOne.id , loser: this.state.titleTwo.id }
-      try {
-        const res = await fetch('/vote', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        })
-        const blogData = await res.json()
-        console.log('Success:', blogData)
-      } catch(error) {
-        console.error('Error:', error);
-      };
+      this.postVote(data)
     } else {
       const data = { winner: this.state.titleTwo.id , loser: this.state.titleOne.id }
-      try {
-        const res = await fetch('/vote', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        })
-        const blogData = await res.json()
-        console.log('Success:', blogData)
-      } catch(error) {
-        console.error('Error:', error);
-      }
+      this.postVote(data)
     }
   }
 
@@ -69,8 +59,8 @@ class Versus extends React.Component {
       <div>
         <h1>Versus</h1>
         <h3>{this.state.category}</h3>
-        <text>Title One: </text><a onClick={this.postVote}>{this.state.titleOne.title}</a><hr/>
-        <text>Title Two: </text><a onClick={this.postVote}>{this.state.titleTwo.title}</a>
+        <text>Title One: </text><a onClick={this.postVoteResults}>{this.state.titleOne.title}</a><hr/>
+        <text>Title Two: </text><a onClick={this.postVoteResults}>{this.state.titleTwo.title}</a>
       </div>
     )
   }
