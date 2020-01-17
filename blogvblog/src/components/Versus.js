@@ -3,7 +3,7 @@ import '../styles/versus.css'
 
 class Versus extends React.Component {
   state = {
-    category: null,
+    category: undefined,
     titleOne: {},
     titleTwo: {},
     disable: false,
@@ -11,7 +11,6 @@ class Versus extends React.Component {
   };
 
   componentDidMount() {
-      // Call our fetch function below once the component mounts
     this.getBlogs()
       .then(res => this.setState({ 
         category: res.category, 
@@ -20,7 +19,7 @@ class Versus extends React.Component {
       }))
       .catch(err => console.log(err));
   }
-    // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+  
   getBlogs = async () => {
     const response = await fetch('/versus');
     const body = await response.json();
