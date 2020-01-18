@@ -95,3 +95,16 @@ exports.blogs_vote_post = async function(req, res) {
     res.status(500).send(e)
   }
 }
+
+exports.winners_get = async function(req, res) {
+  try{
+    const blogWinners = await Blogs.getWinners()
+    console.log(blogWinners)
+    if(!blogWinners) {
+      throw new Error('404a')
+    }
+    res.send(blogWinners)
+  } catch (e) {
+    res.send(e)
+  }
+}

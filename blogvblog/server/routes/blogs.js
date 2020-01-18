@@ -8,4 +8,6 @@ router.post('/voted', blogs_controller.blogs_voted_post)
 
 router.post('/vote', blogs_controller.blogs_vote_post)
 
+router.get('/winners', blogs_controller.winners_get)
+
 module.exports = router

@@ -56,6 +56,34 @@ blogSchema.statics.getBlogTitles = async function() {
   return blogs
 }
 
+blogSchema.statics.getWinners = async function() {
+  const blog = this
+  const winnerBlogs = await blog.aggregate([
+    {
+      '$sort': {
+        'score': -1
+      }
+    }, {
+      '$group': {
+        '_id': '$category', 
+        'title': {
+          '$first': '$title'
+        }, 
+        'score': {
+          '$first': '$score'
+        }, 
+        'id': {
+          '$first': '$_id'
+        }, 
+        'versus': {
+          '$first': '$versus'
+        }
+      }
+    }
+  ])
+  return winnerBlogs
+}
+
 const Blogs = mongoose.model('Blogs', blogSchema)
 
 module.exports = Blogs
