@@ -52,7 +52,6 @@ class Versus extends React.Component {
           }
         }
       })
-      console.log(this.state.storedBlogs)
     } catch(error) {
       console.error('Error:', error);
     };
@@ -61,16 +60,12 @@ class Versus extends React.Component {
   postVoteResults = async (e) => {
     e.preventDefault();
     if(e.target.innerText === this.state.titleOne.title) {
-      console.log(this.state)
       const data = { winner: this.state.titleOne._id , loser: this.state.titleTwo._id }
       this.setState(() => ({ disable: true }))
-      console.log(data)
       await this.postVote(data)
     } else {
-      console.log(this.state)
       const data = { winner: this.state.titleTwo._id , loser: this.state.titleOne._id }
       this.setState(() => ({ disable: true }))
-      console.log(data)
       await this.postVote(data)
     }
     setTimeout(() => {
@@ -82,19 +77,29 @@ class Versus extends React.Component {
           titleTwo: preState.storedBlogs.titleTwo,
         }
       })
-    }, 1500)
+    }, 500)
   }
 
   render() {
     return (
       <div>
-        <h1>Versus</h1>
-        <h3 className="versus__category">{this.state.category}</h3>
-        <p className="versus__option">Blog Option One: </p>
-          <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a>
-          <hr/>
-        <p className="versus__option">Blog Option Two: </p>
-          <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
+        <div className="versus__category">
+          <div className="versus__category-subtext">Category</div>
+          <h3 className="versus__category-title">{this.state.category}</h3>
+        </div>
+        <div className="versus__flexbox">
+          <div className="versus__box">
+            <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a>
+          </div>
+          <div className="versus__line"></div>
+          <div className="versus__box">
+            <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
+          </div>
+        </div>
+    
+        <div className="versus__footer">
+          <p>Which title is more interesting?</p>
+        </div>
       </div>
     )
   }
