@@ -1,0 +1,23 @@
+div {
+  font-family: $Robo;
+}
+
+.versus__disable {
+  cursor: not-allowed;
+}
+
+.versus__enable {
+  cursor: pointer;
+}
+
+.versus__category {
+  text-transform: capitalize;
+  text-decoration: none;
+  font-size: $m-size;
+  color: $blue;
+}
+
+
+.versus__option {
+  font-size: $m-size;
+}

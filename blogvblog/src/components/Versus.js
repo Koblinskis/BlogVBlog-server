@@ -1,5 +1,4 @@
 import React from 'react'
-import '../styles/versus.css'
 
 class Versus extends React.Component {
   state = {
@@ -90,9 +89,12 @@ class Versus extends React.Component {
     return (
       <div>
         <h1>Versus</h1>
-        <h3 className="title">{this.state.category}</h3>
-        <p className="option">Blog Option One: </p><a className={this.state.disable ? "disable" : "enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a><hr/>
-        <p className="option">Blog Option Two: </p><a className={this.state.disable ? "disable" : "enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
+        <h3 className="versus__category">{this.state.category}</h3>
+        <p className="versus__option">Blog Option One: </p>
+          <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a>
+          <hr/>
+        <p className="versus__option">Blog Option Two: </p>
+          <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
       </div>
     )
   }

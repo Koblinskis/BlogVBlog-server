@@ -1,19 +1,19 @@
-.box {
+.footer__box {
   display: flex;
   justify-content: space-between;
   box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.25);
-  background-color: #333333;
-  color: #fff599;
+  background-color: $black;
+  color: $yellow;
 }
 
-.box__left {
-  font-size: 20px;
+.footer__box-left {
+  font-size: $s-size;
   padding: 3px;
   padding-left: 5px;
 }
 
-.box__right {
-  font-size: 16px;
+.footer__box-right {
+  font-size: $t-size;
   padding: 5px;
   padding-top: 6px;
 }

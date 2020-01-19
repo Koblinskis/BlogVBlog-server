@@ -1,10 +1,9 @@
 import React from 'react'
-import '../styles/footer.css'
 
 const Footer = () => (
-  <div className="box">
-    <div className="box__left">© S. Michael Koblinski</div>
-    <div className="box__right">Made with ❤️</div>
+  <div className="footer__box">
+    <div className="footer__box-left">© S. Michael Koblinski</div>
+    <div className="footer__box-right">Made with ❤️</div>
   </div>
 )
 
