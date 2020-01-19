@@ -85,7 +85,9 @@ class Versus extends React.Component {
       <div>
         <div className="versus__category">
           <div className="versus__category-subtext">Category</div>
-          <h3 className="versus__category-title">{this.state.category}</h3>
+          <div className="versus__category-subbox">
+            <h3 className="versus__category-title">{this.state.category}</h3>
+          </div>
         </div>
         <div className="versus__flexbox">
           <div className="versus__box">

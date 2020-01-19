@@ -21,6 +21,11 @@ div {
   font-size: $m-size;
   width: 800px;
   height: 92px;
+  
+  border: 1px solid #1762A6;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 }
 
 .versus__category-subtext {
@@ -44,6 +49,13 @@ div {
   color: $yellow;
   font-size: 72px;
   margin-top: 5px;
+}
+
+.versus__category-subbox {
+  position: absolute;
+  width: 800px;
+  display: flex;
+  justify-content: center;
 }
 
 .versus__box {
