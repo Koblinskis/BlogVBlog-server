@@ -6,22 +6,36 @@ class Winners extends React.Component {
     winners: []
   }
 
+  componentDidMount = async () => {
+    const winnersAsync = await this.getWinners()
+    console.log(winnersAsync)
+    winnersAsync.forEach(winner => {
+      this.setState((preState) => ({ winners: preState.winners.concat(winner)}))
+    });
+  }
+
   getWinners = async () => {
     try {
       const res = await fetch('/winners')
       const data = await res.json()
       
-      console.log(data)
+      return data
     } catch (e) {
       alert('Error')
     }
   }
 
+  getWinnersResults = async () => {
+  }
+
   render() {
     return (
-      <div>
-        <h1>Winner</h1>
-        <button onClick={this.getWinners}>winners</button>
+      <div className="winner__big-box">
+        <h1 className="winner__title">Winners</h1>
+        <div className="winner__box">
+          {this.state.winners.map(winner => (<div key={winner.id}><p className="winner__category">{winner._id}:</p>   <p className="winner__winning-title">{winner.title}<hr/>{winner.score}</p></div>))}
+
+        </div>
       </div>
     )
   }
