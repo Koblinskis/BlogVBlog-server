@@ -1,5 +1,4 @@
 import React from 'react'
-import MyChart from './MyChart'
 
 import { Chart } from 'chart.js'
 
