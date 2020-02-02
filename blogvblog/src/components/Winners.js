@@ -35,7 +35,7 @@ class Winners extends React.Component {
           return title
         }),
         datasets: [{
-          label: "Score",
+          label: "Highest Score",
           data: this.state.winners.map(winner => winner.score),
             //backgroundColor:'green',
             backgroundColor:[

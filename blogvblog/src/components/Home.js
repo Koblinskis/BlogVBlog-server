@@ -9,6 +9,9 @@ const Home = () => (
     </div>
     <button className="home__button">
       <NavLink to="/versus" className="home__button-text">Versus Page</NavLink>
+    </button> <br/>
+    <button className="home__button">
+      <NavLink to="/winners" className="home__button-text">Winners Page</NavLink>
     </button>
   </div>
 )
