@@ -1,8 +1,8 @@
 {
   "name": "BlogVBlog",
   "scripts": {
-    "heroku-prebuild": "cd blogvblog",
-    "heroku-postbuild": "npm run start-server"
+    "heroku-prebuild": "cd blogvblog && npm install",
+    "heroku-postbuild": "cd blogvblog && npm run start-server"
   },
   "repository": {
     "type": "git",
