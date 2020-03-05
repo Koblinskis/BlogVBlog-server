@@ -79,6 +79,10 @@ div {
   border-radius: 140px;
 }
 
+.versus__box:hover {
+  cursor: pointer
+}
+
 .versus__flexbox {
   display: flex;
   flex-direction: row;

@@ -1,4 +1,5 @@
 import React from 'react'
+import Spinner from './Spinner'
 
 class Versus extends React.Component {
   state = {
@@ -6,12 +7,14 @@ class Versus extends React.Component {
     titleOne: {},
     titleTwo: {},
     disable: false,
+    loading: true,
     storedBlogs: {}
   };
 
   componentDidMount() {
     this.getBlogs()
       .then(res => this.setState({ 
+        loading: false,
         category: res.category, 
         titleOne: { title: res.blogTitles[0].title, _id: res.blogTitles[0]._id}, 
         titleTwo: { title: res.blogTitles[1].title, _id: res.blogTitles[1]._id },
@@ -39,7 +42,6 @@ class Versus extends React.Component {
         body: JSON.stringify(data)
       })
       const newBlogs = await res.json()
-      console.log(newBlogs)
       if(!newBlogs[2].category) {
         throw new Error()
       }
@@ -57,21 +59,18 @@ class Versus extends React.Component {
     };
   }
 
-  postVoteResults = async (e) => {
-    e.preventDefault();
-    if(e.target.innerText === this.state.titleOne.title) {
-      const data = { winner: this.state.titleOne._id , loser: this.state.titleTwo._id }
-      this.setState(() => ({ disable: true }))
-      await this.postVote(data)
-    } else {
-      const data = { winner: this.state.titleTwo._id , loser: this.state.titleOne._id }
-      this.setState(() => ({ disable: true }))
-      await this.postVote(data)
-    }
+  postVoteResults = async ({title}) => {
+    const data = title === this.state.titleOne.title
+    ?  { winner: this.state.titleOne._id , loser: this.state.titleTwo._id }
+    :  { winner: this.state.titleTwo._id , loser: this.state.titleOne._id }
+    
+    this.setState(() => ({ disable: true, loading: true}))
+    await this.postVote(data)
     setTimeout(() => {
       this.setState((preState) => {
         return {
           disable: false,
+          loading: false,
           category: preState.storedBlogs.category,
           titleOne: preState.storedBlogs.titleOne,
           titleTwo: preState.storedBlogs.titleTwo,
@@ -90,12 +89,15 @@ class Versus extends React.Component {
           </div>
         </div>
         <div className="versus__flexbox">
-          <div className="versus__box">
-            <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleOne.title}</a>
+          <div className="versus__box" onClick={this.state.disable ? undefined : () => this.postVoteResults(this.state.titleOne)}>
+            {this.state.loading ? <Spinner/> :
+            <a className={this.state.disable ? "versus__disable" : "versus__enable"}>{this.state.titleOne.title}</a>}
+            
           </div>
           <div className="versus__line"></div>
-          <div className="versus__box">
-            <a className={this.state.disable ? "versus__disable" : "versus__enable"} onClick={this.state.disable ? undefined : this.postVoteResults}>{this.state.titleTwo.title}</a>
+          <div className="versus__box" onClick={this.state.disable ? undefined : () => this.postVoteResults(this.state.titleTwo)}>
+            {this.state.loading ? <Spinner/> :
+            <a className={this.state.disable ? "versus__disable" : "versus__enable"}>{this.state.titleTwo.title}</a>}
           </div>
         </div>
     
