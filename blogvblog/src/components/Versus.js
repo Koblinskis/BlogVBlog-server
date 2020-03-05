@@ -23,7 +23,7 @@ class Versus extends React.Component {
   }
   
   getBlogs = async () => {
-    const response = await fetch('/versus');
+    const response = await fetch(process.env.REACT_APP_NODE_SERVER_URL + '/versus');
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -34,7 +34,7 @@ class Versus extends React.Component {
   
   postVote = async (data) => {
     try {
-      const res = await fetch('/vote', {
+      const res = await fetch(process.env.REACT_APP_NODE_SERVER_URL + '/vote', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

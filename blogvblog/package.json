@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "chart.js": "^2.9.3",
+    "cors": "^2.8.5",
     "css-loader": "^3.4.2",
+    "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "mongo": "^0.1.0",
     "mongoose": "^5.8.7",
@@ -32,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon ./server/app.js",
+    "server": "env-cmd -f ./config/dev.env nodemon server/app.js",
     "mongo": "C:/Users/Me/mongodb/bin/mongod.exe --dbpath=C:/Users/Me/mongodb-data"
   },
   "eslintConfig": {
@@ -49,6 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:3001/"
+  }
 }

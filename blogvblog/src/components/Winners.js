@@ -100,7 +100,7 @@ class Winners extends React.Component {
 
   getWinners = async () => {
     try {
-      const res = await fetch('/winners')
+      const res = await fetch(process.env.REACT_APP_NODE_SERVER_URL + '/winners')
       const data = await res.json()
       
       return data
