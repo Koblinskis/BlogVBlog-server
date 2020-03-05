@@ -121,7 +121,7 @@ class Winners extends React.Component {
                     id="myChart"
                     ref={this.chartRef}
                 />
-          {this.state.winners.map(winner => (<div key={winner.id}><p className="winner__category">{winner._id}:</p>   <p className="winner__winning-title">{winner.title}<hr/>{winner.score}</p></div>))}
+          {this.state.winners.map(winner => (<div key={winner.id}><p className="winner__category">{winner._id}:</p>   <p className="winner__winning-title">{winner.title}<hr/>Number of Votes: {winner.score}</p></div>))}
           
         </div>
       </div>
