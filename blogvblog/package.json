@@ -36,7 +36,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "env-cmd -f ./.env.development nodemon server/app.js",
-    "mongo": "C:/Users/Me/mongodb/bin/mongod.exe --dbpath=C:/Users/Me/mongodb-data"
+    "mongo": "C:/Users/Me/mongodb/bin/mongod.exe --dbpath=C:/Users/Me/mongodb-data",
+    "start-server": "node server/app.js"
   },
   "eslintConfig": {
     "extends": "react-app"
