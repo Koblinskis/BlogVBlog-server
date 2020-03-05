@@ -3,7 +3,7 @@ require('./database/mongodb')
 const cors = require('cors')
 const blogRouter = require('./routes/blogs')
 const timelineRouter = require('./routes/timeline')
-const port = process.env.REACT_APP_NODE_PORT
+const port = process.env.PORT || 3001
 const app = express()
 
 app.use(cors())
